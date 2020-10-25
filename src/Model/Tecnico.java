@@ -5,6 +5,9 @@
  */
 package Model;
 
+import DAO.ProdutosDAO;
+import DAO.TecnicoDAO;
+
 /**
  *
  * @author kazuo
@@ -16,6 +19,19 @@ public class Tecnico {
     private double valorDaHora = 0;
 
     
+     /**
+     * @return the codigoTecnico
+     */
+    public int getCodigoTecnico() {
+        return codigoTecnico;
+    }
+
+    /**
+     * @param codigoTecnico the codigoTecnico to set
+     */
+    public void setCodigoTecnico(int codigoTecnico) {
+        this.codigoTecnico = codigoTecnico;
+    }
     public String getNome() {
         return nome;
     }
@@ -45,7 +61,7 @@ public class Tecnico {
         setNome(nome);
         setSalario(salario);
         setValorDaHora(valorDaHora);
-        
+        gravar();
     }
 
     @Override
@@ -58,18 +74,11 @@ public class Tecnico {
         return ret;
         
     }
-
-    /**
-     * @return the codigoTecnico
-     */
-    public int getCodigoTecnico() {
-        return codigoTecnico;
+        private void gravar(){
+        TecnicoDAO dao = new TecnicoDAO();
+        int codigo = dao.create(this);
+        if(codigo > 0) setCodigoTecnico(codigo);      
     }
 
-    /**
-     * @param codigoTecnico the codigoTecnico to set
-     */
-    public void setCodigoTecnico(int codigoTecnico) {
-        this.codigoTecnico = codigoTecnico;
-    }
+
 }
