@@ -4,6 +4,9 @@
  * and open the template in the editor.
  */
 package Model;
+
+import DAO.ClienteDAO;
+
 /**
  * eu sou o mario
  * 
@@ -16,11 +19,22 @@ package Model;
  * @author kazuo
  */
 public class Cliente {
+    private int codigo = 0;
     private String nome = null;
     private String cpf = null;
     private String fone = null;
     private String celular = null;
     private String email = null;
+    
+     
+    public int getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
+    }
+    
 
     public void setNome(String nome) {
         this.nome = nome;
@@ -68,6 +82,7 @@ public class Cliente {
         setFone(fone);
         setCelular(celular);
         setEmail(email);
+        gravar();
         
         
     }
@@ -81,5 +96,10 @@ public class Cliente {
                 "Email...: [" + getEmail() + "]\n";
         return ret;
     }
-    
+    private void gravar(){
+        ClienteDAO dao = new ClienteDAO();
+        int codigo = dao.create(this);
+        if(codigo > 0) setCodigo(codigo);
+        
+    }
 }

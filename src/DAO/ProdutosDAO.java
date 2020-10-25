@@ -3,19 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package infosys;
+
+package DAO;
 
 /**
  *
  * @author kazuo
  */
-public class InfoSys {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        System.out.print("Fede muito");
-    }
+public class ProdutosDAO {
     
 }
