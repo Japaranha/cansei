@@ -10,10 +10,12 @@ package Model;
  * @author kazuo
  */
 public class Tecnico {
+    private int codigoTecnico = 0;
     private String nome = null;
     private double salario = 0 ;
     private double valorDaHora = 0;
 
+    
     public String getNome() {
         return nome;
     }
@@ -55,5 +57,19 @@ public class Tecnico {
         
         return ret;
         
+    }
+
+    /**
+     * @return the codigoTecnico
+     */
+    public int getCodigoTecnico() {
+        return codigoTecnico;
+    }
+
+    /**
+     * @param codigoTecnico the codigoTecnico to set
+     */
+    public void setCodigoTecnico(int codigoTecnico) {
+        this.codigoTecnico = codigoTecnico;
     }
 }

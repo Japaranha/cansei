@@ -6,8 +6,8 @@
 
 package DAO;
 
-import Model.Cliente;
 import Model.Produto;
+import Model.Tecnico;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,24 +18,24 @@ import java.util.List;
  *
  * @author kazuo
  */
-public class ProdutosDAO implements Persistencia<Produto>{
-   
+public class TecnicoDAO implements Persistencia<Tecnico> {
+    
+    
     @Override
-    public int create(Produto p){
+    public int create(Tecnico t){
         int id = 0;
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement pst = null;
         ResultSet rs = null;
         
         
-        String sql = "INSERT INTO Produtos (Descricao,Estoque,Custo,Venda) values(?,?,?,?)";
+        String sql = "INSERT INTO Produtos (Nome,Salario,ValorHora) values(?,?,?)";
         try{
             pst = con.prepareStatement(sql,PreparedStatement.RETURN_GENERATED_KEYS);
-            pst.setString(1, p.getDescricao());
-            pst.setInt(2,p.getEstoque());
-            pst.setDouble(3,p.getCusto());
-            pst.setDouble(4,p.getVenda());
-          
+            pst.setString(1, t.getNome());
+            pst.setDouble(2,t.getSalario());
+            pst.setDouble(3,t.getValorDaHora());
+            
             pst.getGeneratedKeys();
             if(rs.next()){
                 id = rs.getInt(1);
@@ -49,22 +49,22 @@ public class ProdutosDAO implements Persistencia<Produto>{
     }
 
     @Override
-    public List<Produto> read() {
+    public List<Tecnico> read() {
         throw new UnsupportedOperationException("Não implementado ainda."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public boolean update(Produto obj) {
+    public boolean update(Tecnico obj) {
         throw new UnsupportedOperationException("Não implementado ainda."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public boolean delete(Produto obj) {
+    public boolean delete(Tecnico obj) {
         throw new UnsupportedOperationException("Não implementado ainda."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Produto findByCodigo(int id) {
+    public Tecnico findByCodigo(int id) {
         throw new UnsupportedOperationException("Não implementado ainda."); //To change body of generated methods, choose Tools | Templates.
     }
 }

@@ -5,6 +5,9 @@
  */
 package Model;
 
+import DAO.ClienteDAO;
+import DAO.ProdutosDAO;
+
 /**
  *
  * @author kazuo
@@ -16,7 +19,21 @@ public class Produto {
     private boolean ativo = false;
     private double custo = 0;
     private double venda = 0;
+    
+    
+    /**
+     * @return the codigoProduto
+     */
+    public int getCodigoProduto() {
+        return codigoProduto;
+    }
 
+    /**
+     * @param codigoProduto the codigoProduto to set
+     */
+    public void setCodigoProduto(int codigoProduto) {
+        this.codigoProduto = codigoProduto;
+    }
 
 
     public String getDescricao() {
@@ -65,6 +82,7 @@ public class Produto {
         setCusto(custo);
         setAtivo(ativo);
         setVenda(venda);
+        gravar();
     }
     @Override
     public String toString(){
@@ -78,26 +96,9 @@ public class Produto {
         return ret;
     }
 
-    /**
-     * @return the codigoProduto
-     */
-    public int getCodigoProduto() {
-        return codigoProduto;
+    private void gravar(){
+        ProdutosDAO dao = new ProdutosDAO();
+        int codigo = dao.create(this);
+        if(codigo > 0) setCodigoProduto(codigo);      
     }
-
-    /**
-     * @param codigoProduto the codigoProduto to set
-     */
-    public void setCodigoProduto(int codigoProduto) {
-        this.codigoProduto = codigoProduto;
-    }
-
-
-    
-
- 
-
-   
-    
-    
 }
