@@ -10,6 +10,7 @@ package Model;
  * @author kazuo
  */
 public class Produto {
+    private int codigoProduto = 0;
     private String descricao = null;
     private int estoque ;
     private boolean ativo = false;
@@ -75,6 +76,20 @@ public class Produto {
                 "Custo.: [" + getCusto() + "]\n"+
                 "Venda...: [" + getVenda() + "]\n";
         return ret;
+    }
+
+    /**
+     * @return the codigoProduto
+     */
+    public int getCodigoProduto() {
+        return codigoProduto;
+    }
+
+    /**
+     * @param codigoProduto the codigoProduto to set
+     */
+    public void setCodigoProduto(int codigoProduto) {
+        this.codigoProduto = codigoProduto;
     }
 
 

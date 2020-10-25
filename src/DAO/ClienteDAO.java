@@ -30,14 +30,14 @@ public class ClienteDAO implements Persistencia<Cliente> {
         ResultSet rs = null;
         
         
-        String sql = "INSERT INTO Clientes (Nome,CPF,Fone,Celular,Email) values(?,?,?,?)";
+        String sql = "INSERT INTO Clientes (Nome,CPF,Fone,Celular,Email) values(?,?,?,?,?)";
         try{
             pst = con.prepareStatement(sql,PreparedStatement.RETURN_GENERATED_KEYS);
-            pst = setString(1,c.getNome());
-            pst = setString(2,c.getCpf());
-            pst = setString(3,c.getFone());
-            pst = setString(4,c.getCelular());
-            pst = setString(5,c.getEmail());
+            pst.setString(1,c.getNome());
+            pst.setString(2,c.getCpf());
+            pst.setString(3,c.getFone());
+            pst.setString(4,c.getCelular());
+            pst.setString(5,c.getEmail());
             pst.getGeneratedKeys();
             if(rs.next()){
                 id = rs.getInt(1);
@@ -50,9 +50,7 @@ public class ClienteDAO implements Persistencia<Cliente> {
         return id;
     }
 
-    private PreparedStatement setString(int i, String nome) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+
 
     @Override
     public List<Cliente> read() {
