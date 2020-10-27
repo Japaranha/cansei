@@ -3,8 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package View;
+
+import DAO.ClienteDAO;
+import Model.Cliente;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -17,6 +20,23 @@ public class TelaConsulta extends javax.swing.JFrame {
      */
     public TelaConsulta() {
         initComponents();
+        montaTabelaCliente();
+    }
+
+    private void montaTabelaCliente() {
+        DefaultTableModel modelo = (DefaultTableModel) tbConsulta.getModel();
+        modelo.setNumRows(0);
+        ClienteDAO CliDAO = new ClienteDAO();
+
+        for (Cliente c : CliDAO.read()) {
+            modelo.addRow(new Object[]{
+                c.getNome(),
+                c.getCpf(),
+                c.getFone(),
+                c.getCelular(),
+                c.getEmail()
+            });
+        }
     }
 
     /**
@@ -30,12 +50,17 @@ public class TelaConsulta extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        lblConsulta = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tbConsulta = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resource/InfoSysLogo-Pequeno.png"))); // NOI18N
+
+        lblConsulta.setBackground(new java.awt.Color(0, 255, 255));
+        lblConsulta.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
+        lblConsulta.setText("Consultas");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -44,17 +69,21 @@ public class TelaConsulta extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
+                .addGap(37, 37, 37)
+                .addComponent(lblConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addComponent(jLabel1)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tbConsulta.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -62,10 +91,10 @@ public class TelaConsulta extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Nome", "Telefone", "Celular", "Email"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tbConsulta);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -129,6 +158,7 @@ public class TelaConsulta extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JLabel lblConsulta;
+    private javax.swing.JTable tbConsulta;
     // End of variables declaration//GEN-END:variables
 }
